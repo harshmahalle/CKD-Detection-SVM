@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CKD Predictor</title>
+    <style>
+
+         body {
+            font-family: Arial, sans-serif;
+            background-color: gray; 
+            padding: 20px;
+        }       
+
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+
+        form {
+            background-color:cadetblue;
+            padding: 20px;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        label, select, input[type="submit"] {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            text-align: center;
+            
+        }
+
+        input[type="submit"] {
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .prediction {
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .prediction p {
+            color: #333;
+        }
+
+    </style>
+</head>
+<body>
+	<h1>CKD Predictor</h1>
+    <form action="/predict" method="post">
+        <label for="sg">Specific Gravity:</label>
+        <input type="number" step="any" id="sg" name="sg" required>
+
+        <label for="al">Albumin:</label>
+        <input type="number" step="any" id="al" name="al" required>
+
+        <label for="sc">Serum Creatinine:</label>
+        <input type="number" step="any" id="sc" name="sc" required>
+
+        <label for="hemo">Hemoglobin:</label>
+        <input type="number" step="any" id="hemo" name="hemo" required>
+
+        <label for="pcv">Packed Cell Volume:</label>
+        <input type="number" step="any" id="pcv" name="pcv" required>
+
+        <label for="htn">Hypertension:</label>
+        <select id="htn" name="htn" required>
+            <option value="0">No</option>
+            <option value="1">Yes</option>
+        </select>
+
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_text %}
+        <div class="prediction">
+            <p>{{ prediction_text }}</p>
+        </div>
+    {% endif %}
+</body>
+</html>
