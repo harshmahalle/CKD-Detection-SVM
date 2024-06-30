@@ -1,6 +1,7 @@
 #importing required library
 import numpy as np
 import pandas as pd
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
 from sklearn.svm import SVC
@@ -55,8 +56,6 @@ def predict_ckd(features):
     y_pred = svc_model.predict(x)
     proba = svc_model.predict_proba(x)
     return y_pred[0], proba.max()
-
-import os
 
 app = Flask(__name__)
 app.config['TEMPLATES_AUTO_RELOAD'] = True

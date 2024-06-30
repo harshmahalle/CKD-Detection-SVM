@@ -2,93 +2,52 @@
 <html>
 <head>
     <title>CKD Predictor</title>
-    <style>
-
-         body {
-            font-family: Arial, sans-serif;
-            background-color: gray; 
-            padding: 20px;
-        }       
-
-        h1 {
-            color: #333;
-            text-align: center;
-        }
-
-        form {
-            background-color:cadetblue;
-            padding: 20px;
-            max-width: 400px;
-            margin: 0 auto;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-
-        label, select, input[type="submit"] {
-            display: block;
-            margin-bottom: 10px;
-        }
-
-        input[type="number"], select {
-            width: 100%;
-            padding: 8px;
-            border-radius: 3px;
-            border: 1px solid #ccc;
-            text-align: center;
-            
-        }
-
-        input[type="submit"] {
-            background-color: #007bff;
-            color: #fff;
-            padding: 10px;
-            border: none;
-            border-radius: 3px;
-            cursor: pointer;
-            text-align: center;
-        }
-
-        .prediction {
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .prediction p {
-            color: #333;
-        }
-
-    </style>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-	<h1>CKD Predictor</h1>
-<form action="/predict" method="post">
-    <label for="sg">Specific Gravity (1.0 - 1.1):</label>
-    <input type="number" step="0.01" id="sg" name="sg" required min="1.0" max="1.1">
-
-    <label for="al">Albumin (0 - 5):</label>
-    <input type="number" step="1" id="al" name="al" required min="0" max="5">
-
-    <label for="sc">Serum Creatinine (0 - 10):</label>
-    <input type="number" step="0.01" id="sc" name="sc" required min="0" max="10">
-
-    <label for="hemo">Hemoglobin (0 - 20):</label>
-    <input type="number" step="0.01" id="hemo" name="hemo" required min="0" max="20">
-
-    <label for="pcv">Packed Cell Volume (0 - 100):</label>
-    <input type="number" step="1" id="pcv" name="pcv" required min="0" max="100">
-
-    <label for="htn">Hypertension:</label>
-    <select id="htn" name="htn" required>
-        <option value="0">No</option>
-        <option value="1">Yes</option>
-    </select>
-
-    <input type="submit" value="Predict">
-</form>
-    {% if prediction_text %}
-        <div class="prediction">
-            <p>{{ prediction_text }}</p>
-        </div>
-    {% endif %} 
+<body class="bg-gradient-to-r from-blue-500 to-purple-600 min-h-screen flex items-center justify-center overflow-hidden">
+    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full overflow-hidden">
+        <h1 class="text-3xl font-bold mb-4 text-center text-gray-800">CKD Predictor</h1>
+        <form action="/predict" method="post" class="space-y-4">
+            <div>
+                <label for="sg" class="block text-sm font-medium text-gray-700">Specific Gravity (1.0 - 1.1):</label>
+                <input type="number" step="0.01" id="sg" name="sg" required min="1.0" max="1.1" value="{{ request.form['sg'] if request.form['sg'] is defined else '' }}" class="mt-1 block w-full px-2 py-1 text-center bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="al" class="block text-sm font-medium text-gray-700">Albumin (0 - 5):</label>
+                <input type="number" step="1" id="al" name="al" required min="0" max="5" value="{{ request.form['al'] if request.form['al'] is defined else '' }}" class="mt-1 block w-full px-2 py-1 text-center bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="sc" class="block text-sm font-medium text-gray-700">Serum Creatinine (0 - 10):</label>
+                <input type="number" step="0.01" id="sc" name="sc" required min="0" max="10" value="{{ request.form['sc'] if request.form['sc'] is defined else '' }}" class="mt-1 block w-full px-2 py-1 text-center bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="hemo" class="block text-sm font-medium text-gray-700">Hemoglobin (0 - 20):</label>
+                <input type="number" step="0.01" id="hemo" name="hemo" required min="0" max="20" value="{{ request.form['hemo'] if request.form['hemo'] is defined else '' }}" class="mt-1 block w-full px-2 py-1 text-center bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="pcv" class="block text-sm font-medium text-gray-700">Packed Cell Volume (0 - 100):</label>
+                <input type="number" step="1" id="pcv" name="pcv" required min="0" max="100" value="{{ request.form['pcv'] if request.form['pcv'] is defined else '' }}" class="mt-1 block w-full px-2 py-1 text-center bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+            </div>
+            <div>
+                <label for="htn" class="block text-sm font-medium text-gray-700">Hypertension:</label>
+                <select id="htn" name="htn" required class="mt-1 block w-full px-2 py-1 bg-gray-50 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                    <option value="0" {% if request.form['htn'] == '0' %} selected {% endif %}>No</option>
+                    <option value="1" {% if request.form['htn'] == '1' %} selected {% endif %}>Yes</option>
+                </select>
+            </div>
+            <div>
+                <input type="submit" value="Predict" class="w-full py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+            </div>
+        </form>
+        {% if prediction_text %}
+            <div class="prediction mt-4 p-4 bg-blue-100 text-blue-800 rounded-md shadow-md">
+                <p class="text-center">{{ prediction_text }}</p>
+            </div>
+        {% endif %}
+    </div>
 </body>
 </html>
+
+
+
+
