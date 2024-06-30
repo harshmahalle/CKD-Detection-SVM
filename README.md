@@ -60,4 +60,4 @@ To deploy the application on Heroku:
 4. Access your hosted application through Heroku's provided URL.
 
 ## Support
-For any issues or questions, please contact [Your Name](mailto:mahalleharsh9@gmail.com).
+For any issues or questions, please contact [Harsh Mahalle](mailto:mahalleharsh9@gmail.com).
