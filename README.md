@@ -15,7 +15,7 @@ This project is a web application that predicts Chronic Kidney Disease (CKD) usi
 ## Installation
 1. Clone the repository:
    ```
-   git clone https://github.com/your_username/CKD-Predictor.git
+   git clone https://github.com/harshmahalle/CKD-Detection-SVM.git
    cd CKD-Predictor
    ```
 
